@@ -56,7 +56,7 @@ if (!String.prototype.includes) {
   };
 }
 
-const gitLFS = "https://github.com/PKAstro/Gemini-2/raw/master/";
+var gitLFS = "https://github.com/PKAstro/Gemini-2/raw/master/";
 
 //make LFS contents relative to the domain:
 if (window.location.href.includes("//gemini-2.com"))
@@ -93,6 +93,11 @@ function localURL(url)
 function theme() {
 	document.getElementById("themeSelector").classList.toggle("show");
   }
+
+
+  function searchShow() {
+    document.getElementById("searchDropdown").classList.toggle("show");
+    }
   // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
 
@@ -111,3 +116,35 @@ window.onclick = function(event) {
   }
 }
 
+
+
+// 1 = google
+// 2 = duckduckgo
+function setSearch(t)
+{
+  set_cookie ( "searchEngine", t, 30);
+}
+
+function getSearch()
+{
+  var c = get_cookie( "searchEngine");
+  if (c!="1" && c!="2") c = "1";
+  return c;
+}
+
+function updateSearch()
+{
+  var s = getSearch();
+
+  if (s=="1") 
+  {
+      document.getElementById("q").placeholder="search Google";
+      document.getElementById("form").action="https://www.google.com/search";
+  } 
+  else if (s=="2")
+  {
+      document.getElementById("q").placeholder="search DuckDuckGo";
+      document.getElementById("form").action="https://duckduckgo.com/";
+  }
+ 
+}
